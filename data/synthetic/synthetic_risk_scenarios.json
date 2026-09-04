@@ -1,0 +1,20 @@
+[
+  {
+    "scenario_id": "SCEN-001",
+    "name": "Monsoon Peak Flood 100-Year Event",
+    "hazard_type": "Flood",
+    "severity": 85.0,
+    "simulated_affected_habitations": 12,
+    "simulated_displaced_population": 14200,
+    "recommended_action": "Activate Highland Safe Zone Alpha and Namkum North Haven immediately."
+  },
+  {
+    "scenario_id": "SCEN-002",
+    "name": "Eastern Ridge Landslide Surge",
+    "hazard_type": "Landslide",
+    "severity": 70.0,
+    "simulated_affected_habitations": 4,
+    "simulated_displaced_population": 3100,
+    "recommended_action": "Evacuate Tatisilwai Basti along designated highway bypass."
+  }
+]

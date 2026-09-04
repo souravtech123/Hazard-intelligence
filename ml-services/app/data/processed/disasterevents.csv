@@ -1,0 +1,6 @@
+event_id,event_date,disaster_type,severity,latitude,longitude,description,affected_population,estimated_damage_inr
+EVT-2024-001,2024-07-12,Flood,85.0,23.3441,85.3096,Severe riverine flooding following unprecedented monsoon rain in Subarnarekha basin.,4500,15000000
+EVT-2024-002,2024-08-04,Landslide,78.0,23.412,85.451,"Massive slope breakdown along eastern highway cut, blocking primary emergency access.",1200,8500000
+EVT-2024-003,2024-09-19,Flash Flood,92.0,23.298,85.22,Cloudburst induced flash flood inundating low-lying residential habitations.,6800,32000000
+EVT-2024-004,2024-10-02,Cyclone,65.0,23.51,85.18,Tropical storm wind damage causing infrastructure disruption and power outages.,2800,9800000
+EVT-2024-005,2024-11-15,Drought,45.0,23.18,85.39,Extended dry spell severely affecting agricultural water supplies and livestock.,8500,12500000

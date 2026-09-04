@@ -1,0 +1,4 @@
+id,district,type,severity,latitude,longitude
+HAZ-001,Ranchi,Flood,85.0,23.3441,85.3096
+HAZ-002,Ranchi,Landslide,78.0,23.412,85.451
+HAZ-003,Ranchi,Flash Flood,92.0,23.298,85.22

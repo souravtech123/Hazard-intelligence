@@ -1,0 +1,4 @@
+id,name,district,capacity,available_capacity,suitability_score,latitude,longitude
+SITE-001,Highland Safe Zone Alpha,Ranchi,600,480,88.0,23.3615,85.3347
+SITE-002,Kanke Ridge Shelter,Ranchi,400,350,92.5,23.455,85.305
+SITE-003,Namkum North Haven,Ranchi,1000,820,85.0,23.34,85.42

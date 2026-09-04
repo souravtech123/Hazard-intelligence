@@ -1,0 +1,6 @@
+id,name,district,state,population,risk_score,risk_level,latitude,longitude
+HAB-001,Kanke Village,Ranchi,Jharkhand,3200,82.5,HIGH,23.4441,85.3196
+HAB-002,Bariatu Basti,Ranchi,Jharkhand,1450,52.0,MODERATE,23.385,85.352
+HAB-003,Namkum Settlement,Ranchi,Jharkhand,5800,88.0,VERY_HIGH,23.318,85.39
+HAB-004,Dhurwa Colony,Ranchi,Jharkhand,620,31.0,LOW,23.3,85.275
+HAB-005,Tatisilwai Basti,Ranchi,Jharkhand,2100,64.0,HIGH,23.36,85.44

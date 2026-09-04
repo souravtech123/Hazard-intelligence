@@ -1,0 +1,75 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kanke Subarnarekha Flood Inundation Zone",
+        "hazard_type": "Flood",
+        "risk_level": "HIGH"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.3,
+              23.43
+            ],
+            [
+              85.33,
+              23.43
+            ],
+            [
+              85.33,
+              23.46
+            ],
+            [
+              85.3,
+              23.46
+            ],
+            [
+              85.3,
+              23.43
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tatisilwai Slope Instability Area",
+        "hazard_type": "Landslide",
+        "risk_level": "VERY_HIGH"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.42,
+              23.35
+            ],
+            [
+              85.46,
+              23.35
+            ],
+            [
+              85.46,
+              23.38
+            ],
+            [
+              85.42,
+              23.38
+            ],
+            [
+              85.42,
+              23.35
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
