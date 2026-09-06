@@ -464,3 +464,114 @@ export const SEED_HAZARDS = [
     createdAt: new Date("2024-07-20"),
   },
 ];
+
+
+/* =========================================================================================
+ * PRODUCTION REAL-WORLD DATA INGESTION EXAMPLES (IMD APIs + ISRO BHUVAN + IOT SENSORS)
+ * Note: These blocks are commented out for demonstration purposes. They illustrate how
+ * real production systems fetch live data to automatically update risk scores.
+ * =========================================================================================
+
+// -----------------------------------------------------------------------------------------
+// 1. IMD (INDIA METEOROLOGICAL DEPARTMENT) REAL-TIME WEATHER API INTEGRATION
+// -----------------------------------------------------------------------------------------
+/*
+interface IMDWeatherData {
+  stationId: string;
+  stationName: string;
+  latitude: number;
+  longitude: number;
+  rainfall24h: number; // in mm
+  temperature: number; // in °C
+  humidity: number;    // in %
+  windSpeed: number;   // in km/h
+  timestamp: string;
+}
+
+export async function fetchIMDLiveWeather(lat: number, lng: number): Promise<IMDWeatherData> {
+  const apiKey = process.env.IMD_API_KEY || "OFFICIAL_IMD_GOV_KEY";
+  const url = `https://api.imd.gov.in/v1/weather/observation?lat=${lat}&lon=${lng}&key=${apiKey}`;
+
+  const response = await fetch(url);
+  const json = await response.json();
+
+  return {
+    stationId: json.station.id,
+    stationName: json.station.name, // e.g. "Ranchi Meteorological Centre"
+    latitude: lat,
+    longitude: lng,
+    rainfall24h: json.observation.rainfall_24h || 0.0,
+    temperature: json.observation.temp_c || 28.0,
+    humidity: json.observation.relative_humidity || 85.0,
+    windSpeed: json.observation.wind_speed_kmh || 25.0,
+    timestamp: json.observation.time,
+  };
+}
+*/
+
+// -----------------------------------------------------------------------------------------
+// 2. ISRO BHUVAN GIS REMOTE SENSING DEM & TERRAIN API INTEGRATION
+// -----------------------------------------------------------------------------------------
+/*
+interface BhuvanGISData {
+  elevation: number;    // meters above sea level
+  slopeAngle: number;   // ground slope inclination in degrees (°)
+  soilMoisture: number; // percentage
+  landslideZone: string; // "HIGH_SUSCEPTIBILITY", "MODERATE", "STABLE"
+}
+
+export async function fetchISROBhuvanTerrain(lat: number, lng: number): Promise<BhuvanGISData> {
+  const token = process.env.BHUVAN_API_TOKEN || "OFFICIAL_ISRO_NRSC_TOKEN";
+  const url = `https://bhuvan-api.nrsc.gov.in/v2/dem/terrain?lat=${lat}&lon=${lng}&token=${token}`;
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  return {
+    elevation: data.dem.elevation_meters, // e.g. 650m (Ranchi Plateau)
+    slopeAngle: data.dem.slope_degrees,    // e.g. 24.5° (Tatisilwai Highway Cut Slope)
+    soilMoisture: data.remote_sensing.soil_moisture_index,
+    landslideZone: data.hazard_layer.landslide_susceptibility,
+  };
+}
+*/
+
+// -----------------------------------------------------------------------------------------
+// 3. IOT GROUND TELEMETRY SENSORS (RIVER WATER LEVEL & HIGHWAY INCLINOMETERS)
+// -----------------------------------------------------------------------------------------
+/*
+interface IoTRiverGaugeSensor {
+  sensorId: string;
+  riverName: string;    // e.g. "Subarnarekha River"
+  locationName: string; // e.g. "Namkum Bridge Gauge"
+  waterLevelMeters: number;
+  dangerMarkLevel: number;
+  isOverDangerMark: boolean;
+}
+
+interface IoTInclinometerSensor {
+  sensorId: string;
+  hillName: string;     // e.g. "Tatisilwai Cut Hill"
+  groundTiltDegrees: number;
+  displacementCm: number;
+  landslideAlert: boolean;
+}
+
+export async function processIoTWaterGaugeWebhook(payload: IoTRiverGaugeSensor) {
+  // If river water level exceeds danger mark, automatically spike flood risk score in database
+  if (payload.isOverDangerMark) {
+    console.log(`🚨 ALERT: ${payload.riverName} at ${payload.locationName} exceeded danger mark! Water height: ${payload.waterLevelMeters}m`);
+    // Example auto-update call:
+    // await habitationRepository.updateByLocation(payload.locationName, { floodRisk: 95.0, riskLevel: "CRITICAL" });
+  }
+}
+
+export async function processIoTInclinometerWebhook(payload: IoTInclinometerSensor) {
+  // If ground displacement exceeds 2.0cm, automatically trigger landslide emergency
+  if (payload.landslideAlert || payload.displacementCm > 2.0) {
+    console.log(`🚨 ALERT: Slope displacement detected at ${payload.hillName}! Tilt: ${payload.groundTiltDegrees}°, Movement: ${payload.displacementCm}cm`);
+    // Example auto-update call:
+    // await habitationRepository.updateByLocation(payload.hillName, { landslideRisk: 98.0, riskLevel: "CRITICAL" });
+  }
+}
+*/

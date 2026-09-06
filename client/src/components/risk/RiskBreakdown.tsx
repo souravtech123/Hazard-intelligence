@@ -8,39 +8,26 @@ interface RiskBreakdownProps {
   items: RiskBreakdownItem[];
 }
 
-const RiskBreakdown = ({
-  items,
-}: RiskBreakdownProps) => {
+const RiskBreakdown = ({ items }: RiskBreakdownProps) => {
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-sm">
-      <h3 className="text-lg font-semibold text-gray-900">
-        Risk Breakdown
+    <div className="rounded-2xl border border-gray-800 bg-gray-900/90 p-6 shadow-xl backdrop-blur-sm">
+      <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">
+        Disaster Impact Breakdown
       </h3>
 
-      <div className="mt-5 divide-y">
+      <div className="divide-y divide-gray-800/80">
         {items.map((item) => (
-          <div
-            key={item.category}
-            className="flex items-center justify-between py-4"
-          >
+          <div key={item.category} className="flex items-center justify-between py-3.5">
             <div>
-              <p className="font-medium text-gray-800">
-                {item.category}
-              </p>
-
-              <p className="text-xs text-gray-500">
-                Contribution: {item.contribution}%
+              <p className="text-xs font-bold text-white">{item.category}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">
+                Model Weight: <b className="text-gray-300">{item.contribution}%</b>
               </p>
             </div>
 
-            <div className="text-right">
-              <p className="text-lg font-bold">
-                {item.score}
-              </p>
-
-              <p className="text-xs text-gray-500">
-                Score
-              </p>
+            <div className="text-right font-mono">
+              <p className="text-lg font-black text-amber-400">{item.score}</p>
+              <p className="text-[10px] text-gray-400 uppercase tracking-widest">Score</p>
             </div>
           </div>
         ))}

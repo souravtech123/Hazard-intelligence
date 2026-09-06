@@ -5,7 +5,7 @@ try:
     from app.api.nlp import router as nlp_router
 
     app = FastAPI(
-        title="Disaster Risk & Relocation ML Service",
+        title="Hazard-Intelligence ML Service",
         description="ML & NLP endpoints for hazard risk assessment and disaster text analysis",
         version="1.0.0",
     )

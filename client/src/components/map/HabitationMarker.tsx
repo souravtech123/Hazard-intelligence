@@ -1,4 +1,4 @@
-import { Marker, Popup } from "react-leaflet";
+import { Marker, Popup, Tooltip } from "react-leaflet";
 import { divIcon } from "leaflet";
 import { Link } from "react-router-dom";
 
@@ -15,21 +15,21 @@ interface HabitationMarkerProps {
 
 function getRiskColor(level: string): string {
   switch (level) {
-    case "CRITICAL": return "#7f1d1d";
-    case "VERY_HIGH": return "#dc2626";
-    case "HIGH": return "#ea580c";
-    case "MODERATE": return "#ca8a04";
-    case "LOW": return "#16a34a";
+    case "CRITICAL": return "#ef4444";
+    case "VERY_HIGH": return "#f97316";
+    case "HIGH": return "#f59e0b";
+    case "MODERATE": return "#eab308";
+    case "LOW": return "#10b981";
     default: return "#6b7280";
   }
 }
 
-function getRiskLabel(level: string): string {
+function getRiskBadge(level: string): string {
   switch (level) {
-    case "CRITICAL": return "🔴 CRITICAL";
-    case "VERY_HIGH": return "🟠 VERY HIGH";
-    case "HIGH": return "🟡 HIGH";
-    case "MODERATE": return "🟢 MODERATE";
+    case "CRITICAL": return "🚨 CRITICAL";
+    case "VERY_HIGH": return "⚠️ VERY HIGH";
+    case "HIGH": return "⚡ HIGH";
+    case "MODERATE": return "🟡 MODERATE";
     case "LOW": return "✅ LOW";
     default: return level;
   }
@@ -50,43 +50,73 @@ const HabitationMarker = ({
   const icon = divIcon({
     className: "",
     html: `<div style="
-      width:14px;height:14px;border-radius:50%;
-      background:${color};border:2px solid white;
-      box-shadow:0 0 6px ${color};
+      width:18px;height:18px;border-radius:50%;
+      background:${color};border:2px solid #ffffff;
+      box-shadow:0 0 12px ${color};
       ${riskLevel === "CRITICAL" || riskLevel === "VERY_HIGH"
         ? `animation:pulse 1.5s infinite;`
         : ""}
     "></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
   });
 
   return (
     <Marker position={[latitude, longitude]} icon={icon}>
-      <Popup minWidth={220}>
-        <div style={{ fontFamily: "sans-serif", fontSize: "13px" }}>
+      {/* Permanent place name label visible on map */}
+      <Tooltip permanent direction="top" offset={[0, -10]} className="dark-map-label">
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <span style={{
+            width: "8px", height: "8px", borderRadius: "50%",
+            background: color, display: "inline-block"
+          }} />
+          <span style={{ fontWeight: 800, fontSize: "11px", color: "#ffffff" }}>{name}</span>
+          <span style={{
+            fontSize: "9px", fontWeight: 700, padding: "1px 4px", borderRadius: "4px",
+            background: `${color}33`, color: color, border: `1px solid ${color}66`
+          }}>
+            {riskScore.toFixed(0)}
+          </span>
+        </div>
+      </Tooltip>
+
+      <Popup minWidth={230} className="dark-popup">
+        <div style={{ fontFamily: "system-ui, sans-serif", fontSize: "12px", color: "#f8fafc" }}>
           <div style={{
-            background: color, color: "white",
-            padding: "6px 10px", borderRadius: "4px 4px 0 0", margin: "-5px -5px 8px",
-            fontWeight: 700
+            background: color, color: "#ffffff",
+            padding: "8px 12px", borderRadius: "8px 8px 0 0", margin: "-10px -14px 10px",
+            fontWeight: 800, fontSize: "13px"
           }}>
             {name}
           </div>
-          <div style={{ lineHeight: 1.8 }}>
-            <b>Risk Level:</b> {getRiskLabel(riskLevel)}<br />
-            <b>Risk Score:</b> {riskScore.toFixed(1)} / 100<br />
-            <b>Population:</b> {population.toLocaleString()}<br />
-            <b>Priority:</b> {relocationPriority}<br />
+          <div style={{ lineHeight: 1.8, color: "#cbd5e1" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
+              <span style={{ color: "#94a3b8" }}>Risk Level:</span>
+              <b style={{ color }}>{getRiskBadge(riskLevel)}</b>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
+              <span style={{ color: "#94a3b8" }}>Risk Score:</span>
+              <b style={{ color: "#ffffff", fontFamily: "monospace" }}>{riskScore.toFixed(1)} / 100</b>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
+              <span style={{ color: "#94a3b8" }}>Population:</span>
+              <b style={{ color: "#ffffff" }}>{population.toLocaleString()} residents</b>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#94a3b8" }}>Priority:</span>
+              <b style={{ color: relocationPriority === "IMMEDIATE" ? "#f87171" : "#34d399" }}>{relocationPriority}</b>
+            </div>
           </div>
           <Link
-            to={`/habitations/${id}`}
+            to={`/dashboard/habitations/${id}`}
             style={{
-              display: "block", marginTop: "8px", textAlign: "center",
-              background: color, color: "white", padding: "5px",
-              borderRadius: "4px", textDecoration: "none", fontWeight: 600
+              display: "block", marginTop: "12px", textAlign: "center",
+              background: "#dc2626", color: "#ffffff", padding: "7px 10px",
+              borderRadius: "8px", textDecoration: "none", fontWeight: 700,
+              fontSize: "12px", boxShadow: "0 4px 12px rgba(220,38,38,0.4)"
             }}
           >
-            View Details & Relocate →
+            Inspect Details & Relocate →
           </Link>
         </div>
       </Popup>

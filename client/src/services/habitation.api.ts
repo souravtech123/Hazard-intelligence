@@ -15,3 +15,8 @@ export const createHabitation = async (data: Partial<Habitation>): Promise<Habit
   const response = await api.post("/habitations", data);
   return response.data.data;
 };
+
+export const updateHabitation = async (id: string, data: Partial<Habitation>): Promise<Habitation> => {
+  const response = await api.put(`/habitations/${id}`, data);
+  return response.data.data;
+};
